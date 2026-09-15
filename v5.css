@@ -1,0 +1,32 @@
+/* V5 — motion is now atmospheric and keeps the content in focus. */
+#liquid-canvas,.liquid-lens,.liquid-orb,.chromatic-aurora{display:none!important}
+.ambient-motion i{opacity:.075}
+.scan-line{opacity:.12}
+.tech-marquee-track{animation-duration:34s}
+.skill-row:after,.project-visual:before,.contact:after{display:none}
+.grid-core span{animation:none}
+.boot-sequence{animation:boot-away .6s 1.3s cubic-bezier(.76,0,.24,1) forwards}
+.boot-copy b:after{animation-duration:1s}
+
+.shooting-stars{position:fixed;inset:0;z-index:4;overflow:hidden;pointer-events:none;opacity:.55}
+.shooting-stars i{position:absolute;display:block;width:3px;height:3px;border-radius:50%;background:#eaffdb;box-shadow:0 0 8px rgba(186,255,41,.65);opacity:0;transform:rotate(-28deg);animation:shooting-star 13s linear infinite}
+.shooting-stars i:after{content:'';position:absolute;right:2px;top:1px;width:110px;height:1px;background:linear-gradient(90deg,transparent,rgba(186,255,41,.46),#efffe6);transform-origin:right}
+.shooting-stars i:nth-child(1){top:13%;left:76%;animation-delay:1.5s;animation-duration:12s}
+.shooting-stars i:nth-child(2){top:32%;left:92%;animation-delay:7.2s;animation-duration:15s}
+.shooting-stars i:nth-child(3){top:62%;left:84%;animation-delay:11.4s;animation-duration:17s}
+.shooting-stars i:nth-child(4){top:79%;left:68%;animation-delay:16s;animation-duration:19s}
+
+@keyframes shooting-star{
+  0%,82%{opacity:0;translate:0 0}
+  84%{opacity:.75}
+  91%{opacity:0;translate:-34vw 22vw}
+  100%{opacity:0;translate:-34vw 22vw}
+}
+
+@media(max-width:800px){
+  .shooting-stars{opacity:.43}
+  .shooting-stars i:after{width:72px}
+  .shooting-stars i:nth-child(3),.shooting-stars i:nth-child(4){display:none}
+  .scan-line{opacity:.08}
+}
+@media(prefers-reduced-motion:reduce){.shooting-stars{display:none}.boot-sequence{display:none}}
