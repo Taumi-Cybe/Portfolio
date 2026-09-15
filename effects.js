@@ -21,6 +21,11 @@
       entries.forEach((entry) => entry.target.classList.toggle('mobile-focus', entry.isIntersecting));
     }, { rootMargin: '-27% 0px -27% 0px', threshold: .18 });
     document.querySelectorAll('.project-card, .method-card, .skill-row').forEach((item) => focusObserver.observe(item));
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => entry.target.classList.toggle('section-in-view', entry.isIntersecting));
+    }, { rootMargin: '-12% 0px -12% 0px', threshold: .08 });
+    document.querySelectorAll('main .section').forEach((section) => sectionObserver.observe(section));
   }
 
   const boot = document.querySelector('.boot-sequence');
