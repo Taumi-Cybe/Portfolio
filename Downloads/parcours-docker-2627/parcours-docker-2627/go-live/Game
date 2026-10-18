@@ -1,0 +1,5 @@
+FROM caddy:latest
+
+RUN apk add git
+RUN git clone https://github.com/henshmi/Classic-Pool-Game.git /pool && mv /pool/* /usr/share/caddy
+EXPOSE 80

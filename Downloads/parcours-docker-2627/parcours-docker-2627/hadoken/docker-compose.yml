@@ -1,0 +1,23 @@
+---
+version: "3.9"
+services:
+  suzaku-castle:
+    image: caddy
+    volumes:
+      - ./suzaku-castle.html:/usr/share/caddy/index.html
+      - ./fighters:/usr/share/caddy/fighters
+    ports:
+      - "80:80"
+
+  battle-harbor:
+    image: nginx
+    volumes:
+      - ./battle-harbor.html:/usr/share/nginx/html/index.html
+      - ./bosses:/usr/share/nginx/html/bosses
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8080:8080"
+
+volumes:
+  fighters:
+  bosses:

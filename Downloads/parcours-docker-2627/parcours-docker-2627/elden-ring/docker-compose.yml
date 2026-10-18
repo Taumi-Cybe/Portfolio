@@ -1,0 +1,56 @@
+---
+version: "3.9"
+services:
+  player:
+    image: ubuntu
+    hostname: ${PLAYER_NAME}
+    environment:
+      CLASS: hero
+    networks:
+      - lands-between
+
+  margit:
+    image: alpine:3.16
+    volumes:
+      - limgrave:/home/limgrave
+    environment:
+      STATUS: optional
+    cpus: 2
+    networks:
+      - lands-between
+
+  draconic-tree-sentinel:
+    image: busybox:1.35
+    env_file:
+      - draconic-tree-sentinel.env
+    volumes:
+      - altus-plateau:${ALTUS}
+    deploy:
+      mode: replicated
+      replicas: 2
+    networks:
+      - lands-between
+
+  godfrey:
+    image: redis:7.0
+    volumes:
+      - leyndell:/home/leyndell
+    environment:
+      STATUS: required
+    ports:
+      - "6379:6379"
+    networks:
+      lands-between:
+        ipv4_address: 10.25.20.22
+
+networks:
+  lands-between:
+    ipam:
+      config:
+        - subnet: 10.25.20.0/24
+          gateway: 10.25.20.254
+
+volumes:
+  limgrave:
+  leyndell:
+  altus-plateau:

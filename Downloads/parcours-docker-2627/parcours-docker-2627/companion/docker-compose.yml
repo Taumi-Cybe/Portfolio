@@ -1,0 +1,57 @@
+---
+version: "3.9"
+services:
+  cube-receptacle:
+    image: postgres
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    tty: true
+    networks:
+      - cube
+
+  edgeless-safety-cube-receptacle:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    tty: true
+    networks:
+      - round
+
+  weighted-storage-cube:
+    image: nginx
+    tty: true
+    networks:
+      - cube
+    depends_on:
+      - cube-receptacle
+
+  edgeless-safety-cube:
+    image: debian
+    tty: true
+    networks:
+      - round
+    depends_on:
+      - edgeless-safety-cube-receptacle
+
+  companion-cube:
+    image: ubuntu
+    tty: true
+    networks:
+      - cube
+    depends_on:
+      - cube-receptacle
+
+  chell:
+    image: busybox
+    networks:
+      - cube
+      - round
+    command: sh -c "ping -c 2 weighted-storage-cube && ping -c 2 edgeless-safety-cube && ping -c 2 companion-cube"
+    depends_on:
+      - companion-cube
+      - edgeless-safety-cube
+      - weighted-storage-cube
+
+networks:
+  cube:
+  round:

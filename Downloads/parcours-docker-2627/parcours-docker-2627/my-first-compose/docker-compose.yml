@@ -1,0 +1,7 @@
+services:
+  hello_world:
+    image: ubuntu
+    command: echo "Hello World!"
+    environment:
+      - CAMPUS="Bordeaux Ynov Campus"
+
